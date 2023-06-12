@@ -9,6 +9,7 @@ const LabelInputForm = ({
   name,
   type,
   placeholder,
+  required,
   ...props
 }) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -28,6 +29,7 @@ const LabelInputForm = ({
         name={name}
         id={name}
         placeholder={placeholder}
+        required={required}
         {...props}
       />
       <span

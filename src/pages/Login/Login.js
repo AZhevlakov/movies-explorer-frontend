@@ -36,7 +36,7 @@ const Login = ({ onFormSubmit }) => {
           name="email"
           type="email"
           placeholder="mail@example.com"
-          required
+          required={true}
         />
         <LabelInputForm
           values={values}
@@ -45,7 +45,7 @@ const Login = ({ onFormSubmit }) => {
           text="Пароль"
           name="password"
           type="password"
-          required
+          required={true}
         />
       </FormAuth>
     </PageLayout>

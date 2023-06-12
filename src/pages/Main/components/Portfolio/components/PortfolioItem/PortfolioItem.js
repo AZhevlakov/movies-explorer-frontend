@@ -1,11 +1,13 @@
 import './PortfolioItem.css';
 import React from 'react';
 
-const PortfolioItem = ({itemName, link}) => {
+const PortfolioItem = ({ itemName, link }) => {
   return (
     <li className="portfolio__item">
-      <p className="portfolio__example">{itemName}</p>
-      <a className="link portfolio__link" href={link} target="_blank" rel="noopener noreferrer">↗</a>
+      <a className="portfolio__link" href={link} target="_blank" rel="noopener noreferrer">
+        <p className="portfolio__example">{itemName}</p>
+        <span className="link portfolio__link-image">↗</span>
+      </a>
     </li>
   );
 };
