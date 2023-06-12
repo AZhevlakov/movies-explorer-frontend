@@ -1,0 +1,30 @@
+.form__button-submit {
+  min-height: 45px;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #fff;
+  background-color: rgb(67, 135, 244);
+}
+
+.form__button-submit:hover {
+  background-color: rgba(67, 135, 244, .7);
+}
+
+.form__button-submit_inactive {
+  background-color: transparent;
+  outline: 2px solid #4285F4;
+  opacity: .5;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 499px) {
+  .form__button-submit {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
