@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header__content {
+  min-height: 74px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__menu {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 50px;
+}
