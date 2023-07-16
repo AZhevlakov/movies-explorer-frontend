@@ -14,6 +14,10 @@ const SavedMovies = () => {
     getSavedMovies();
   }, []);
 
+  useEffect(() => {
+
+  }, [savedMovies])
+
   const getSavedMovies = () => {
     api.getMovies()
       .then((res) => {
@@ -35,7 +39,8 @@ const SavedMovies = () => {
       <MoviesCardList
         movies={searchedMovies}
         isSavedMoviesPage={true}
-        setMovies={setSavedMovies}
+        setSavedMovies={setSavedMovies}
+        setSearchedMovies={setSearchedMovies}
       />
     </PageLayout>
   );

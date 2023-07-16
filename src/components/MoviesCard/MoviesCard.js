@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import React, { useEffect, useState } from 'react';
 import * as api from '../../utils/api/MainApi';
 
-const MoviesCard = ({ card, isSavedMoviesPage = false, setMovies, setPopupOpen, setCardWithTrailer }) => {
+const MoviesCard = ({ card, isSavedMoviesPage = false, setSavedMovies, setSearchedMovies, setPopupOpen, setCardWithTrailer }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [cardLikeButtonClassName, setCardLikeButtonClassName] = useState('');
 
@@ -38,7 +38,8 @@ const MoviesCard = ({ card, isSavedMoviesPage = false, setMovies, setPopupOpen, 
         .then(() => {
           setIsLiked(false);
           if (isSavedMoviesPage) {
-            setMovies((state) => state.filter((c) => c._id !== card._id));
+            setSavedMovies((state) => state.filter((c) => c._id !== card._id));
+            setSearchedMovies((state) => state.filter((c) => c._id !== card._id));
           }
           const movies = JSON.parse(localStorage.getItem('movies'));
           const currentMovie = movies.find((movie) => movie._id === card._id);

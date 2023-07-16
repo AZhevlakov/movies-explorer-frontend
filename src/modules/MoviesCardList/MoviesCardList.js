@@ -4,7 +4,7 @@ import PopupTrailer from '../../components/Popups/PopupTrailer/PopupTrailer';
 import NothingFound from '../../components/NothingFound/NothingFound';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ movies, isSavedMoviesPage, setMovies }) => {
+const MoviesCardList = ({ movies, isSavedMoviesPage, setSavedMovies, setSearchedMovies }) => {
   const [isPopupTrailerOpen, setIsPopupTrailerOpen] = useState(false);
   const [trailer, setTrailer] = useState({});
   const [more, setMore] = useState(false);
@@ -85,7 +85,8 @@ const MoviesCardList = ({ movies, isSavedMoviesPage, setMovies }) => {
                     key={movie.id || movie.movieId}
                     card={movie}
                     isSavedMoviesPage={isSavedMoviesPage}
-                    setMovies={setMovies}
+                    setSavedMovies={setSavedMovies}
+                    setSearchedMovies={setSearchedMovies}
                     setPopupOpen={setIsPopupTrailerOpen}
                     setCardWithTrailer={setTrailer}
                   />)
