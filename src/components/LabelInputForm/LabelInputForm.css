@@ -1,4 +1,5 @@
 .form__field {
+  width: 100%;
   margin: 0;
   padding: 6px 0 0;
   display: flex;
@@ -9,6 +10,7 @@
 }
 
 .form__input {
+  width: 100%;
   margin: 0;
   padding: 5px 0 8px;
   border: 0;
@@ -28,8 +30,8 @@
 }
 
 .form__input-error {
-  max-width: 100%;
-  min-height: 12px;
+  max-width: 396px;
+  min-height: 30px;
   box-sizing: border-box;
   margin: 0;
   padding: 6px 0 0;
@@ -44,4 +46,10 @@
 .form__input-error_active {
   opacity: 1;
   visibility: visible;
+}
+
+@media (max-width: 499px) {
+  .form__input-error {
+    max-width: 260px;
+  }
 }

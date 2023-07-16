@@ -1,13 +1,44 @@
 import './index.css';
-import React, { Suspense } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Routing from '../pages';
-import Preloader from '../components/Preloader/Preloader';
+import { AuthContext } from '../contexts/AuthContext';
+import * as api from '../utils/api/MainApi';
+import LoaderLayout from '../pages/components/LoaderLayout/LoaderLayout';
 
 const App = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoddedIn, setIsLoggedIn] = useState(false);
+  const [isCheckAuthorization, setIsCheckAuthorization] = useState(false);
+
+  const contextAuthValue = useMemo(() => ({
+    currentUser,
+    setCurrentUser,
+  }), [currentUser]);
+
+  const checkAuthorization = () => {
+    if (localStorage.getItem('token')) {
+      api.getUserInfo()
+        .then((res) => {
+          if (res) {
+            setCurrentUser(res);
+            setIsLoggedIn(true);
+          }
+        })
+        .catch(err => alert(err))
+        .finally(() => setIsCheckAuthorization(true));
+    } else {
+      setIsCheckAuthorization(true);
+    }
+  };
+
+  useEffect(() => {
+    checkAuthorization();
+  }, [isLoddedIn]);
+
   return (
-    <Suspense fallback={<Preloader />}>
-      <Routing />
-    </Suspense>
+    <AuthContext.Provider value={contextAuthValue}>
+      {isCheckAuthorization ? <Routing /> : <LoaderLayout />}
+    </AuthContext.Provider>
   );
 };
 

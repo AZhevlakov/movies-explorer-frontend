@@ -3,11 +3,11 @@ import React from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-const PageLayout = ({ children, isHeader = true, isFooter = true, isViewer, headerClassName }) => {
+const PageLayout = ({ children, isHeader = true, isFooter = true, headerClassName }) => {
   return (
     <div className="page">
       <div className="page__container">
-        {isHeader && <Header isViewer={isViewer} className={headerClassName} />}
+        {isHeader && <Header className={headerClassName} />}
         <main className="content">
           {children}
         </main>

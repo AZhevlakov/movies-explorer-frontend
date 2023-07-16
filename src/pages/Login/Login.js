@@ -1,12 +1,35 @@
-import React from 'react';
-import { useFormValidation } from '../../hooks/useFormValidation';
+import React, { useContext } from 'react';
+import { useFormValidation } from '../../utils/hooks/useFormValidation';
 import PageLayout from '../components/PageLayout/PageLayout';
 import LabelInputForm from '../../components/LabelInputForm/LabelInputForm';
 import './Login.css';
 import FormAuth from '../../modules/FormAuth/FormAuth';
+import * as api from '../../utils/api/MainApi';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
-const Login = ({ onFormSubmit }) => {
+const Login = () => {
   const { values, errors, isValid, handleChange } = useFormValidation();
+  const { setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  function handleLogin(email, password) {
+    api.login(email, password)
+      .then((data) => {
+        if (data?.token) {
+          localStorage.setItem('token', data.token);
+          api.getUserInfo()
+            .then((res) => {
+              if (res) {
+                setCurrentUser(res);
+                navigate('/movies', { replace: true });
+              }
+            })
+        } else {
+          alert('Что-то пошло не так, немного подождите и попробуйте войти снова');
+        }
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +37,7 @@ const Login = ({ onFormSubmit }) => {
     if (!values.email || !values.password) {
       return;
     }
-    // onFormSubmit(values.userName, values.email, values.password);
+    handleLogin(values.email, values.password);
   };
 
   return (

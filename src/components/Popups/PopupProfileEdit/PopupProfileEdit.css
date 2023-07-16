@@ -1,0 +1,31 @@
+.form-profile-edit {
+  width: 396px;
+  margin: 50px 40px;
+  padding: 0;
+}
+
+.form-profile-edit__set {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+.form-profile-edit__heading {
+  margin: 0 auto 30px;
+}
+
+.form-profile-edit__button-submit {
+  margin-top: 40px;
+  min-width: 40%;
+  align-self: center;
+}
+
+@media (max-width: 499px) {
+  .form-profile-edit {
+    width: 260px;
+    margin: 20px;
+  }
+}

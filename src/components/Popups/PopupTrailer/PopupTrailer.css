@@ -1,0 +1,10 @@
+.popup__trailer {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+  max-width: 75vw;
+  max-height: 75vh;
+  display: block;
+  line-height: 0;
+  object-fit: contain;
+}
