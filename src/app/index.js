@@ -25,9 +25,9 @@ const App = () => {
           }
         })
         .catch(err => alert(err))
-        .finally(() => setIsCheckAuthorization(true));
+        .finally(() => setIsCheckAuthorization(prev => !prev));
     } else {
-      setIsCheckAuthorization(true);
+      setIsCheckAuthorization(prev => !prev);
     }
   };
 
