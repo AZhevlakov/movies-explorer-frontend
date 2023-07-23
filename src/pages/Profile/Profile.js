@@ -31,6 +31,7 @@ const Profile = () => {
       .then((res) => {
         setCurrentUser(res);
         setIsPopupProfileEditOpen(false);
+        alert('Данные успешно сохранены.');
       })
   }
 
