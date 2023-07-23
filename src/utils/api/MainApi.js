@@ -28,9 +28,11 @@ const request = (
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      throw new Error(`Ошибка: ${res.status}`);
     })
-    .catch((err) => alert(err));
+    .catch((err) => {
+      alert(err);
+    });
 };
 
 const requestWithToken = ({ ...params }) => {

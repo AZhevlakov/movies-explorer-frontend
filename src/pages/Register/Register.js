@@ -15,7 +15,11 @@ const Register = () => {
 
   function handleRegister(userName, email, password) {
     api.register(userName, email, password)
-      .then((res) => handleLogin(email, password));
+      .then((res) => {
+        if (res?.email) {
+          handleLogin(res.email, password);
+        }
+      });
   }
 
   function handleLogin(email, password) {
