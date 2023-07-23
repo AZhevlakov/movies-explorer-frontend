@@ -9,7 +9,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 
 const PopupProfileEdit = ({ isOpen, onClose, onSubmit }) => {
   const { currentUser } = useContext(AuthContext);
-  const { values, errors, isValid, handleChange } = useFormValidation();
+  const { values, errors, isValid, handleChange } = useFormValidation({userName: currentUser.name, email: currentUser.email});
 
   const handleSubmit = (e) => {
     e.preventDefault();
