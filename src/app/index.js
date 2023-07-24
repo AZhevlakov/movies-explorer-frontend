@@ -7,7 +7,6 @@ import LoaderLayout from '../pages/components/LoaderLayout/LoaderLayout';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoddedIn, setIsLoggedIn] = useState(false);
   const [isCheckAuthorization, setIsCheckAuthorization] = useState(false);
 
   const contextAuthValue = useMemo(() => ({
@@ -21,7 +20,6 @@ const App = () => {
         .then((res) => {
           if (res) {
             setCurrentUser(res);
-            setIsLoggedIn(true);
           }
         })
         .catch(err => alert(err))
@@ -33,7 +31,7 @@ const App = () => {
 
   useEffect(() => {
     checkAuthorization();
-  }, [isLoddedIn]);
+  }, []);
 
   return (
     <AuthContext.Provider value={contextAuthValue}>
