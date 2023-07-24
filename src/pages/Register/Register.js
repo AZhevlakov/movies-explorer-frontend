@@ -1,12 +1,44 @@
-import React from 'react';
-import { useFormValidation } from '../../hooks/useFormValidation';
+import React, { useContext, useState } from 'react';
+import { useFormValidation } from '../../utils/hooks/useFormValidation';
 import PageLayout from '../components/PageLayout/PageLayout';
 import LabelInputForm from '../../components/LabelInputForm/LabelInputForm';
 import './Register.css';
 import FormAuth from '../../modules/FormAuth/FormAuth';
+import * as api from '../../utils/api/MainApi';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
-const Register = ({ onFormSubmit }) => {
+const Register = () => {
+  const [areFieldsBlocked, setAreFieldsBlocked] = useState(false);
   const { values, errors, isValid, handleChange } = useFormValidation();
+  const { setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  function handleRegister(userName, email, password) {
+    api.register(userName, email, password)
+      .then((res) => {
+        if (res?.email) {
+          handleLogin(res.email, password);
+        }
+      });
+  }
+
+  function handleLogin(email, password) {
+    api.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          api.getUserInfo()
+            .then((res) => {
+              if (res) {
+                setCurrentUser(res);
+                navigate('/movies', { replace: true });
+              }
+            })
+            .finally(() => setAreFieldsBlocked(false));
+        }
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +46,8 @@ const Register = ({ onFormSubmit }) => {
     if (!values.userName || !values.email || !values.password) {
       return;
     }
-    // onFormSubmit(values.userName, values.email, values.password);
+    setAreFieldsBlocked(prev => !prev);
+    handleRegister(values.userName, values.email, values.password);
   };
 
   return (
@@ -27,6 +60,7 @@ const Register = ({ onFormSubmit }) => {
         isAuthText="Уже зарегистрированы?&nbsp;"
         isAuthLink="/signin"
         isAuthButtonText="Войти"
+        isBlocked={areFieldsBlocked}
       >
         <LabelInputForm
           values={values}
@@ -39,6 +73,7 @@ const Register = ({ onFormSubmit }) => {
           minLength="2"
           maxLength="30"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
         <LabelInputForm
           values={values}
@@ -49,6 +84,7 @@ const Register = ({ onFormSubmit }) => {
           type="email"
           placeholder="mail@example.com"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
         <LabelInputForm
           values={values}
@@ -58,6 +94,7 @@ const Register = ({ onFormSubmit }) => {
           name="password"
           type="password"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
       </FormAuth>
     </PageLayout>

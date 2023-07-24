@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ViewerNavigation from './components/ViewerNavigation/ViewerNavigation';
 import UserNavigation from './components/UserNavigation/UserNavigation';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import Logo from '../../../components/Logo/Logo';
 import './Header.css';
+import { AuthContext } from '../../../contexts/AuthContext';
 
-const Header = ({ isViewer, className }) => {
+const Header = ({ className }) => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <>
@@ -15,7 +17,7 @@ const Header = ({ isViewer, className }) => {
           <Logo />
           <nav className="header__menu">
             {
-              isViewer
+              currentUser
                 ?
                 <ViewerNavigation isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
                 :

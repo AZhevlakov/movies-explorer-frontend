@@ -1,28 +1,48 @@
 .card {
-  display: grid;
-  grid-template-areas:
-    "name like"
-    "duration like"
-    "image image";
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin: 0;
   padding: 0;
   background-color: #222222;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card__info {
+  padding: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__description {
+  margin-right: 14px;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow: hidden;
 }
 
 .card__name {
-  grid-area: name;
+  max-width: 100%;
   margin: 0;
-  padding: 14px 0 0 14px;
+  padding: 0;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .card__duration {
-  grid-area: duration;
-  margin: 9px 0 14px 14px;
+  margin: 9px 0 0 0;
   padding: 0;
   font-size: 11px;
   font-weight: normal;
@@ -30,17 +50,15 @@
 }
 
 .card__like {
-  grid-area: like;
-  justify-self: end;
-  align-self: center;
   width: 30px;
   height: 30px;
-  margin: 0 14px;
+  margin: 0;
   padding: 0;
   border: none;
   box-sizing: border-box;
   background: url('../../assets/icons/favorites-save-non-active-icon.svg') center no-repeat;
   background-size: 100%;
+  flex: 0 0 30px;
 }
 
 .card__like_active {
@@ -48,22 +66,21 @@
 }
 
 .card__dislike {
-  grid-area: like;
-  justify-self: end;
-  align-self: center;
   width: 30px;
   height: 30px;
-  margin: 0 14px;
+  margin: 0;
   padding: 0;
   border: none;
   box-sizing: border-box;
   background: url('../../assets/icons/favorites-remove-icon.svg') center no-repeat;
   background-size: 100%;
+  flex: 0 0 30px;
 }
 
 .card__image {
-  grid-area: image;
+  display: block;
+  flex-grow: 1;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
 }

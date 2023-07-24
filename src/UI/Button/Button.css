@@ -1,9 +1,18 @@
 .button {
-  margin: 0;
   padding: 0;
   text-align: center;
   transition: .3s;
   cursor: pointer;
   border: none;
   border-radius: 3px;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: .5;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

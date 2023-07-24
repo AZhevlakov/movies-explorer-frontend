@@ -13,6 +13,7 @@ const BurgerMenu = ({ isBurgerOpen, setIsBurgerOpen }) => {
       document.removeEventListener("keydown", handleEscapeClose);
     };
   }, [isBurgerOpen, setIsBurgerOpen]);
+
   return (
     <div className={`burger-menu ${isBurgerOpen ? "burger-menu_active" : ""}`} onMouseDown={() => setIsBurgerOpen(false)}>
       <div className={`burger-menu__container ${isBurgerOpen ? "burger-menu__container_active" : ""}`} onMouseDown={e => e.stopPropagation()}>
