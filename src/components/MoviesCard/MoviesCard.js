@@ -53,10 +53,13 @@ const MoviesCard = ({ card, isSavedMoviesPage = false, setSavedMovies, setSearch
         .then((res) => {
           setIsLiked(true);
           card._id = res._id;
+          console.log(res._id);
+          console.log(card._id);
+          console.log(JSON.stringify(card));
           const movies = JSON.parse(localStorage.getItem('movies'));
-          const index = movies.findIndex((movie) => movie.id === res.movieId);
-          movies[index].isLiked = true;
-          movies[index]._id = res._id;
+          const currentMovie = movies.find((movie) => movie.id === res.movieId);
+          currentMovie.isLiked = true;
+          currentMovie._id = res._id;
 
           localStorage.setItem('movies', JSON.stringify(movies));
         });

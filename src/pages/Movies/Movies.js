@@ -17,10 +17,14 @@ const Movies = () => {
   const [isShort, setIsShort] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('searchedMovies')) {
+    if (localStorage.getItem('movies') && localStorage.getItem('searchLineValue')) {
       setIsNoSearch(false);
-      setSearchedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
-      setIsShort(localStorage.getItem('isShortMovies') === 'true' ? true : false);
+      const movies = JSON.parse(localStorage.getItem('movies'));
+      const searchLineValue = localStorage.getItem('searchLineValue');
+      const isShortMovies = localStorage.getItem('isShortMovies') === 'true' ? true : false;
+      const searchResult = searchMovies(movies, searchLineValue, isShortMovies);
+      setSearchedMovies(searchResult);
+      setIsShort(isShortMovies);
     }
   }, []);
 
@@ -39,7 +43,6 @@ const Movies = () => {
               setSearchedMovies(searchResult);
 
               localStorage.setItem('movies', JSON.stringify(movies));
-              localStorage.setItem('searchedMovies', JSON.stringify(searchResult));
               setIsNoSearch(false);
             })
             .finally(setIsLoading(false));
@@ -47,7 +50,6 @@ const Movies = () => {
     } else {
       searchResult = searchMovies(JSON.parse(localStorage.getItem('movies')), searchLineValue, isShortMovies);
       setSearchedMovies(searchResult);
-      localStorage.setItem('searchedMovies', JSON.stringify(searchResult));
       setIsLoading(false);
     }
     localStorage.setItem('searchLineValue', searchLineValue);

@@ -14,10 +14,6 @@ const SavedMovies = () => {
     getSavedMovies();
   }, []);
 
-  useEffect(() => {
-
-  }, [savedMovies])
-
   const getSavedMovies = () => {
     api.getMovies()
       .then((res) => {
