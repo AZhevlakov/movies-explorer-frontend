@@ -7,7 +7,7 @@ import { useFormValidation } from '../../../utils/hooks/useFormValidation';
 import { useContext } from "react";
 import { AuthContext } from '../../../contexts/AuthContext';
 
-const PopupProfileEdit = ({ isOpen, onClose, onSubmit }) => {
+const PopupProfileEdit = ({ isOpen, onClose, onSubmit, isBlocked=false }) => {
   const { currentUser } = useContext(AuthContext);
   const { values, errors, isValid, handleChange } = useFormValidation({userName: currentUser.name, email: currentUser.email});
 
@@ -28,7 +28,7 @@ const PopupProfileEdit = ({ isOpen, onClose, onSubmit }) => {
         name="profile-edit"
         noValidate
       >
-        <fieldset className="form-profile-edit__set">
+        <fieldset className="form-profile-edit__set" disabled={isBlocked}>
           <legend className="form-profile-edit__heading">
             Редактировать профиль
           </legend>

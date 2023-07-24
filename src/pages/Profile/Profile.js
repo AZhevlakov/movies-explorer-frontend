@@ -11,6 +11,7 @@ const Profile = () => {
   const [isPopupProfileEditOpen, setIsPopupProfileEditOpen] = useState(false);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [areFieldsBlocked, setAreFieldsBlocked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,12 +28,14 @@ const Profile = () => {
   }
 
   function saveProfile(name, email) {
+    setAreFieldsBlocked(prev => !prev);
     api.updateUserInfo(name, email)
       .then((res) => {
         setCurrentUser(res);
         setIsPopupProfileEditOpen(false);
         alert('Данные успешно сохранены.');
       })
+      .finally(() => setAreFieldsBlocked(false));
   }
 
   function handleEditButton() {
@@ -66,7 +69,7 @@ const Profile = () => {
           <button onClick={handleSignout} className="link profile__signout">Выйти из аккаунта</button>
         </div>
       </section>
-      <PopupProfileEdit isOpen={isPopupProfileEditOpen} onClose={onClosePopupProfileEdit} onSubmit={saveProfile} />
+      <PopupProfileEdit isOpen={isPopupProfileEditOpen} onClose={onClosePopupProfileEdit} onSubmit={saveProfile} isBlocked={areFieldsBlocked} />
     </PageLayout>
   );
 };

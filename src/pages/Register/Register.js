@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormValidation } from '../../utils/hooks/useFormValidation';
 import PageLayout from '../components/PageLayout/PageLayout';
 import LabelInputForm from '../../components/LabelInputForm/LabelInputForm';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const Register = () => {
+  const [areFieldsBlocked, setAreFieldsBlocked] = useState(false);
   const { values, errors, isValid, handleChange } = useFormValidation();
   const { setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Register = () => {
                 navigate('/movies', { replace: true });
               }
             })
+            .finally(() => setAreFieldsBlocked(false));
         }
       });
   }
@@ -44,6 +46,7 @@ const Register = () => {
     if (!values.userName || !values.email || !values.password) {
       return;
     }
+    setAreFieldsBlocked(prev => !prev);
     handleRegister(values.userName, values.email, values.password);
   };
 
@@ -57,6 +60,7 @@ const Register = () => {
         isAuthText="Уже зарегистрированы?&nbsp;"
         isAuthLink="/signin"
         isAuthButtonText="Войти"
+        isBlocked={areFieldsBlocked}
       >
         <LabelInputForm
           values={values}
@@ -69,6 +73,7 @@ const Register = () => {
           minLength="2"
           maxLength="30"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
         <LabelInputForm
           values={values}
@@ -79,6 +84,7 @@ const Register = () => {
           type="email"
           placeholder="mail@example.com"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
         <LabelInputForm
           values={values}
@@ -88,6 +94,7 @@ const Register = () => {
           name="password"
           type="password"
           required={true}
+          isBlocked={areFieldsBlocked}
         />
       </FormAuth>
     </PageLayout>

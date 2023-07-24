@@ -6,3 +6,13 @@
   border: none;
   border-radius: 3px;
 }
+
+.button:disabled {
+  cursor: default;
+  opacity: .5;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -5,7 +5,7 @@ import Title from '../../UI/Title/Title';
 import ButtonForm from '../../UI/Button/ButtonForm/ButtonForm';
 import './FormAuth.css';
 
-const FormAuth = ({ children, onSubmit, title, buttonSubmitText, isButtonSubmitActive, isAuthText, isAuthLink, isAuthButtonText }) => {
+const FormAuth = ({ children, onSubmit, title, buttonSubmitText, isButtonSubmitActive, isAuthText, isAuthLink, isAuthButtonText, isBlocked = false }) => {
   return (
     <section className="auth">
       <Logo />
@@ -21,7 +21,7 @@ const FormAuth = ({ children, onSubmit, title, buttonSubmitText, isButtonSubmitA
           {children}
         </div>
         <div>
-          <ButtonForm className="form-auth__button-submit" text={buttonSubmitText} isActive={isButtonSubmitActive} />
+          <ButtonForm className="form-auth__button-submit" text={buttonSubmitText} isActive={isButtonSubmitActive} isBlocked={isBlocked} />
           <div className="form-auth__signin">
             <p className="form-auth__is-register">{isAuthText}</p>
             <Link to={isAuthLink} className="link form-auth__signin-link">{isAuthButtonText}</Link>
