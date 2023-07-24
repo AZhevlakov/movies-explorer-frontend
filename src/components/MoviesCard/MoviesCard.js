@@ -53,9 +53,6 @@ const MoviesCard = ({ card, isSavedMoviesPage = false, setSavedMovies, setSearch
         .then((res) => {
           setIsLiked(true);
           card._id = res._id;
-          console.log(res._id);
-          console.log(card._id);
-          console.log(JSON.stringify(card));
           const movies = JSON.parse(localStorage.getItem('movies'));
           const currentMovie = movies.find((movie) => movie.id === res.movieId);
           currentMovie.isLiked = true;
